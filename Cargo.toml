@@ -1,0 +1,32 @@
+[package]
+name = "pong"
+version = "0.1.0"
+edition = "2021"
+
+[dev-dependencies]
+threadpool = "1.8.1"
+criterion = { version = "0.5.1", features = ["html_reports"] }
+
+
+[[bench]]
+name = "bench"
+harness = false
+
+[profile.release]
+#lto = true
+panic = "abort"
+#opt-level = 0
+#codegen-units = 255
+#incremental = true
+
+[profile.bench]
+lto = true
+panic = "abort"
+opt-level = 3
+codegen-units = 1
+incremental = false
+
+[dependencies]
+futures = { version = "0.3.30", features = ["thread-pool"] }
+raylib = "*"
+winapi = { version = "*", features = ["processthreadsapi", "winbase"] }
